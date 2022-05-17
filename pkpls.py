@@ -1,7 +1,6 @@
-import os
-import env
 import secrets
 import time
+from decouple import config
 from decimal import Decimal, ROUND_DOWN
 from web3 import Web3
 
@@ -54,8 +53,9 @@ def scan(w3):
 
 
 def main():
+    ALCHEMY_KEY = config('ALCHEMY_KEY')
     w3 = gen_w3(
-        f'https://eth-mainnet.alchemyapi.io/v2/{os.getenv('ALCHEMY_SECRET')}')
+        f'https://eth-mainnet.alchemyapi.io/v2/{ALCHEMY_KEY}')
     detect = False
     print('LETS BEGIN')
     start = time.time()
