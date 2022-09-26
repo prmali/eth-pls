@@ -8,7 +8,7 @@ from decouple import config
 from web3 import Web3
 from ens import ENS
 
-from data import names
+from data import names, mythologicalCreatures
 
 SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())
 
@@ -57,7 +57,8 @@ async def main(retry_limit=500):
     ns = ENS.fromWeb3(w3)
 
     async with aiohttp.ClientSession(trust_env=True) as session:
-        await asyncio.gather(*[get(ns, session, f'{name}.eth', retry_limit) for name in names])
+        # await asyncio.gather(*[get(ns, session, f'{d}.eth', retry_limit) for d in set(mythologicalCreatures)])
+        # await asyncio.gather(*[get(ns, session, f'{name}.eth', retry_limit) for name in names])
         # await asyncio.gather(*[get(ns, session, f'{str(num).zfill(3)}.eth', retry_limit) for num in range(644, 999)])
         # await asyncio.gather(*[get(ns, session, f'{str(num).zfill(4)}.eth', retry_limit) for num in range(1, 9999)])
         # await asyncio.gather(*[get(ns, session, f'{str(num).zfill(5)}.eth', retry_limit) for num in range(1, 99999)])
